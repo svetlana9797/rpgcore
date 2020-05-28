@@ -1,5 +1,3 @@
-# SwiftFMIRPGore
+# SwiftFMIRPCore
 
-Core project that defines the main protocols, classes and strcutures which should be used in a custom implementation of each game module.
-
-
+THis project defines the main building blocks for a RolePlayingGame. It conatians a stub implementation to show that a game can be build. The project is separaetd to several modules and each module, can be re-defined.
