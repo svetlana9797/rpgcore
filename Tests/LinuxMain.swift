@@ -1,7 +1,7 @@
 import XCTest
 
-import SwiftFMIRPGoreTests
+import SwiftFMIRPCoreTests
 
 var tests = [XCTestCaseEntry]()
-tests += SwiftFMIRPGoreTests.allTests()
+tests += SwiftFMIRPCoreTests.allTests()
 XCTMain(tests)

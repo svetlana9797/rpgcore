@@ -1,7 +1,7 @@
 import XCTest
 import class Foundation.Bundle
 
-final class SwiftFMIRPGoreTests: XCTestCase {
+final class SwiftFMIRPCoreTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
@@ -12,7 +12,7 @@ final class SwiftFMIRPGoreTests: XCTestCase {
             return
         }
 
-        let fooBinary = productsDirectory.appendingPathComponent("SwiftFMIRPGore")
+        let fooBinary = productsDirectory.appendingPathComponent("SwiftFMIRPCore")
 
         let process = Process()
         process.executableURL = fooBinary
