@@ -7,10 +7,45 @@ protocol Map {
     func move(player: Player, move: PlayerMove)
 }
 
+protocol MapRenderer {
+    func render(map:Map)
+}
+
 protocol PlayerMove {
     var direction: MapMoveDirection {get set}
     
     var friendlyCommandName: String {get set} 
+}
+
+class StandartPlayerMove: PlayerMove {
+    var direction: MapMoveDirection
+    
+    var friendlyCommandName: String
+    
+    init(direction: MapMoveDirection) {
+        self.direction = direction
+        switch self.direction {
+        case .up:
+            friendlyCommandName = "up"
+        case .down:
+            friendlyCommandName = "down"
+        case .left:
+            friendlyCommandName = "left"
+        case .right:
+            friendlyCommandName = "right"
+        }
+    }
+}
+
+extension PlayerMove {
+    var allMoves: [PlayerMove] {
+        return [
+        StandartPlayerMove(direction: .up),
+        StandartPlayerMove(direction: .down),
+        StandartPlayerMove(direction: .left),
+        StandartPlayerMove(direction: .right)
+        ]
+    }
 }
 
 enum MapMoveDirection {

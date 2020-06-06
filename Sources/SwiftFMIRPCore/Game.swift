@@ -5,10 +5,12 @@ func readLine<T: LosslessStringConvertible>(as type: T.Type) -> T? {
 class Game {
     var mapGenerator: MapGenerator
     var playerGenerator: PlayerGenerator
+    var mapRenderer: MapRenderer
 
-    init(mapGenerator: MapGenerator, playerGenerator: PlayerGenerator) {
+    init(mapGenerator: MapGenerator, playerGenerator: PlayerGenerator, mapRenderer: MapRenderer) {
         self.mapGenerator = mapGenerator
         self.playerGenerator = playerGenerator
+        self.mapRenderer = mapRenderer
     }
     
     //implement main logic
@@ -45,8 +47,80 @@ class Game {
         //     * Потребителя контролира това като му се предоставя възможност за действие.
         //     * ако се въведе системна команда като `map` се визуализра картата
         // 1. Следващия играч става текущ.
+        
+        var currentPlayerIndex = 0
+        
+        while activePlayers(allPlayers: players).count > 1  {
+            if var currentPlayer:Player = players[currentPlayerIndex] as? Player, currentPlayer.isAlive {
+                let playerNumber = currentPlayerIndex + 1
+                print("Сега е на ход играч №\(playerNumber) - \(currentPlayer.name)")
+                
+                ///команди от играча
+                var playerMoveIsNotFinished = true
+                repeat {
+                    print("Моля въведете команда от възможните: ")
+                    let availableMoves = map.availableMoves(player: currentPlayer)
+                    var allCommands = ["finish", "map"]
+                    if currentPlayer.isAlive {
+                        allCommands.append("seppuku")
+                        availableMoves.forEach { (move) in
+                            allCommands.append(move.friendlyCommandName)
+                        }
+                    }
+                    print("\(allCommands)")
+                    
+                    if let command = readLine(as: String.self) {
+                        //TODO: провери дали не е от някои от възможните други действия
+                        //TODO: ако е от тях изпълни действието
+                        if let move = availableMoves.first(where: { (move) -> Bool in
+                            move.friendlyCommandName == command
+                        }) {
+                            //разпозната команда
+                            map.move(player: currentPlayer, move: move)
+                            
+                        } else {
+                            //иначе, провери за
+                            //специални команди
+                            switch command {
+                            case "finish":
+                                playerMoveIsNotFinished = false
+                                print("Вашият ход приключи.")
+                            case "map":
+                                print("Отпечатваме картата:")
+                                mapRenderer.render(map: map)
+                            case "seppuku":
+                                print("Ritual suicide...")
+                                currentPlayer.isAlive = false
+                                playerMoveIsNotFinished = false
+                                print("Вашият ход приключи.")
+                            default:
+                                print("Непозната команда!")
+                            }
+                        }
+                    } else {
+                      print("Невалиден вход! Моля, опитай пак.")
+                    }
+                } while playerMoveIsNotFinished
+            }
+            
+            //минаваме на следващия играч
+            currentPlayerIndex += 1
+            currentPlayerIndex %= players.count
+        }
+        let winners = activePlayers(allPlayers: players)
+        if winners.count > 0 {
+            print("Победител е: \(winners[0].name)")
+        } else {
+            print("Няма победител :/. Опитайте да изиграете нова игра.")
+        }
 
         print("RPG game has finished.")
         
+    }
+    
+    private func activePlayers(allPlayers: [Player]) -> [Player] {
+        return allPlayers.filter { (p) -> Bool in
+            p.isAlive
+        }
     }
 }

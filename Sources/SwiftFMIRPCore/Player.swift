@@ -7,5 +7,4 @@ protocol Player {
 protocol PlayerGenerator {
     init(heroGenerator: HeroGenerator)
     func generatePlayer(name: String) -> Player
-    
 }

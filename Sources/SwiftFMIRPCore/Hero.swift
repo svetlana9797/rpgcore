@@ -11,3 +11,20 @@ protocol Hero {
 protocol HeroGenerator {
     func getRandom() -> Hero
 }
+
+protocol Fight {
+    var attacker: Hero {get set}
+    var host: Hero {get set}
+    
+    func start(finish:(Fight) -> ())
+    var winner: Hero {get set}
+}
+
+protocol FightGenerator {
+    
+}
+
+protocol EquipmentGenerator {
+    var allArmors: [Armor] {get}
+    var allWeapons: [Weapon] {get}
+}
