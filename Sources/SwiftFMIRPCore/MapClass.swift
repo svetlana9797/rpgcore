@@ -4,15 +4,15 @@ public class MapClass : Map {
 
     required init(players: [Player]) {
         self.players = players
-        self.maze = Array(Array(repeating: , count: Int))
+        self.maze = []
     }
-
-    
 
     func availableMoves(player: Player) -> [PlayerMove] {
-
+        return []
     }
-    func move(player: Player, move: PlayerMove) {
 
+    func move(player: Player, move: PlayerMove) {
+        //check for possible moves
+        //remove 1 energy
     }
 }
