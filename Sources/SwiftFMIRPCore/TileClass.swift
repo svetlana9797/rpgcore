@@ -27,4 +27,8 @@ public class TeleportTileClass:TileClass {
         self.portal = position// Position(x:0,y:0)
         super.init(type:.teleport) //call the base class initializer
     }
+
+    func setPortal(pos:Position) {
+        portal = pos
+    }
 }
