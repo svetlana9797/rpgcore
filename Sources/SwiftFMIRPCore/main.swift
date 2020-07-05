@@ -1,12 +1,14 @@
-/*var mapGenerator = DefaultMapGenerator()
+var mapGenerator = MapGeneration()//var mapGenerator = DefaultMapGenerator()
+
 var playerGenerator = DefaultPlayerGenerator(heroGenerator: DefaultHeroGenerator())
 var figthGenerator = DefaultFightGenerator()
 var equipmentGenerator = DefaultEquipmentGenerator()
-var mapRendered = DefaultMapRenderer()
+var mapRendered = MapRendererClass()//var mapRendered = DefaultMapRenderer()
+
 var game = Game(mapGenerator: mapGenerator, playerGenerator: playerGenerator, mapRenderer: mapRendered)
 
 game.run()
-*/
+
 
 /*
 var t = TileClass(type:.empty)
@@ -22,9 +24,9 @@ var res = shuffleMap(a)
 print(a)
 //arr.shuffle()
 print(res)
-*/
+
 
 let m = MapGeneration().generate(players: [])
-
-var mapRendered = DefaultMapRenderer()
+var mapRendered = MapRendererClass() //DefaultMapRenderer()
 mapRendered.render(map: m)
+*/

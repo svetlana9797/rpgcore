@@ -27,11 +27,18 @@ public class MapRendererClass : MapRenderer {
                 r += " "
             }
         }
-        
+        //put players on their places on the map
+        //"🤖","🧚","🧙","🐉‍"
+
         print("\(r)")
     }
     
     private func renderMapLegend() {
-        print("No map legend, yet!")
+        print("\nMap legend:")
+        print("📦 - Treasure chest (can contain life points, armor or weapons)")
+        print("🗿 - Rock (must be broken in order to move to this field)")
+        print("💿 - Teleport (transfers the player to a random exit)")
+        print("🧱 - Wall (player cannot move to this field)")
+        print("🤖, 🧚, 🧙, 🐉‍ - possible Players")
     }
 }
