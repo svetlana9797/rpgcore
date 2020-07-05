@@ -1,4 +1,4 @@
-var mapGenerator = MapGeneration()//var mapGenerator = DefaultMapGenerator()
+/*var mapGenerator = MapGeneration()//var mapGenerator = DefaultMapGenerator()
 
 var playerGenerator = DefaultPlayerGenerator(heroGenerator: DefaultHeroGenerator())
 var figthGenerator = DefaultFightGenerator()
@@ -8,9 +8,9 @@ var mapRendered = MapRendererClass()//var mapRendered = DefaultMapRenderer()
 var game = Game(mapGenerator: mapGenerator, playerGenerator: playerGenerator, mapRenderer: mapRendered)
 
 game.run()
-
-
+*/
 /*
+
 var t = TileClass(type:.empty)
 t.state = "blah"
 var p = TeleportTileClass(position:Position(x:0,y:0))
@@ -24,9 +24,16 @@ var res = shuffleMap(a)
 print(a)
 //arr.shuffle()
 print(res)
-
-
-let m = MapGeneration().generate(players: [])
-var mapRendered = MapRendererClass() //DefaultMapRenderer()
-mapRendered.render(map: m)
 */
+
+var playerGenerator = DefaultPlayerGenerator(heroGenerator: DefaultHeroGenerator())
+let p = [playerGenerator.generatePlayer(name:"one"),playerGenerator.generatePlayer(name:"two")]
+//print(p[0].name)
+let m = MapClass(players:p)//MapGeneration().generate(players: p)
+
+print(m.playersPositions)
+
+var mapRendered = MapRendererClass() //DefaultMapRenderer()
+mapRendered.renderMap(map: m)
+m.move(player: p[0], move: StandartPlayerMove(direction:.up))
+mapRendered.renderMap(map: m)

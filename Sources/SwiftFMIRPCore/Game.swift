@@ -35,8 +35,6 @@ class Game {
            players.append(playerGenerator.generatePlayer(name: "Player #\(i)"))
        }
        
-       
-       
 
         let map = mapGenerator.generate(players: players)
         // 1. Избор на брой играчи. Минимум 2 броя.
