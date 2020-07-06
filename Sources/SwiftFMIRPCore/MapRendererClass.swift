@@ -2,28 +2,13 @@
 public class MapRendererClass : MapRenderer {
     func renderMap(map:MapClass) {
         render(map:map)
-        //renderPlayers(map:map)
         print("\nCurrent player's positions:")
-        map.playersPositions.forEach { print("\($0): \($1)") }
-        
-    }
-/*
-    func renderPlayers(map:MapClass) {
-        for player in map.players {
-            let x: Int = map.playersPositions[player.name]?.x ?? 0
-            let y: Int = map.playersPositions[player.name]?.y ?? 0
-            switch player.hero.race {
-                case "elf": map.maze[x][y] = "🧚"
-                case "wizard": map.maze[x][y] = "🧙"
-                case "dragon": map.maze[x][y] = "🐉‍"
-                case "ghost": map.maze[x][y] = "👻"
-                default: map.maze[x][y] = "🤖"
-                //"🤖","🧚","🧙","🐉‍","👻"
-            }
-            //map.maze[x][y]
+        for player in map.playersPositions.keys {
+            print("\(player) -> (x:\(map.playersPositions[player]!.y),y:\(map.maze.count - map.playersPositions[player]!.x - 1))")
         }
-    }
-    */
+        //map.playersPositions.forEach { print("\($0): \($1)") }
+        
+    } 
 
     func render(map: Map) {
         for row in map.maze {
@@ -45,7 +30,13 @@ public class MapRendererClass : MapRenderer {
             case .teleport:
                 r += "💿"
             case .empty: 
-                r += "  "
+                switch tile.state {
+                case "elf": r += "🧚"
+                case "wizard": r += "🧙"
+                case "dragon": r += "🐉‍"
+                case "ghost": r += "👻"
+                default: r += "  "
+            }
             case .wall:
                 r += "🧱"
             default:
@@ -63,6 +54,6 @@ public class MapRendererClass : MapRenderer {
         print("🗿 - Rock (must be broken in order to move to this field)")
         print("💿 - Teleport (transfers the player to a random exit)")
         print("🧱 - Wall (player cannot move to this field)")
-        print("🤖, 🧚, 🧙, 🐉,👻‍ - possible Players")
+        print("🧚, 🧙, 🐉, 👻‍ - possible Players")
     }
 }

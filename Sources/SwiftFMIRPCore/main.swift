@@ -28,12 +28,16 @@ print(res)
 
 var playerGenerator = DefaultPlayerGenerator(heroGenerator: DefaultHeroGenerator())
 let p = [playerGenerator.generatePlayer(name:"one"),playerGenerator.generatePlayer(name:"two")]
-//print(p[0].name)
+
 let m = MapClass(players:p)//MapGeneration().generate(players: p)
 
-print(m.playersPositions)
+//print(m.playersPositions)
 
 var mapRendered = MapRendererClass() //DefaultMapRenderer()
 mapRendered.renderMap(map: m)
-m.move(player: p[0], move: StandartPlayerMove(direction:.up))
+let moves = m.availableMoves(player: p[0])
+let move = moves.randomElement()!
+print("player \(p[0].name) moves to move = \(move.friendlyCommandName)")
+
+m.move(player: p[0], move: move)
 mapRendered.renderMap(map: m)
