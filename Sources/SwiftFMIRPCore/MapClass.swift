@@ -1,3 +1,4 @@
+//import SwiftFMIRPCore
 //position
 struct Position: Equatable{
     public var x: Int
@@ -38,7 +39,7 @@ public class MapClass : Map {
                 case (1,_): x = TileClass(type:.wall)
                 case (2,_): x = TileClass(type:.chest)
                 case (3,_): x = TileClass(type:.rock)
-                case (4,0..<players.count*2): x = TeleportTileClass()
+                case (4,0..<players.count*2): x = TileClass(type: .teleport)
                 default: x = TileClass(type:.empty)
                  }
                  maze[i][j] = x 
@@ -101,8 +102,6 @@ public class MapClass : Map {
 
         //set the current player position to vacant
         maze[x][y].state = "no player"
-        //print("\n old maze[x][y].state = \(maze[x][y].state)\n")
-        //print("\n old maze[x][y].type = \(maze[x][y].type)\n")
 
         //change the player position on the map
         switch move.direction {
@@ -119,8 +118,6 @@ public class MapClass : Map {
         //set the new player position tile with the hero
         maze[xNew][yNew].state = player.hero.race
         
-        //print("\n new maze[x][y].state = \(maze[playersPositions[player.name]!.x][playersPositions[player.name]!.y].state)\n")
-        //print("\n new maze[x][y].type = \(maze[playersPositions[player.name]!.x][playersPositions[player.name]!.y].type)\n")
     }
 
 }
@@ -146,11 +143,11 @@ extension MapClass {
     func takeAction(x:Int,y:Int, player:Player) {
         var tile = maze[x][y]
         //remove 1 energy
-        // player.reduceEnergy()
+        //player.reduceEnergy(x:1)
 
         //another player is at the same position as us
         if tile.state != "no player" {
-            print("Fight! Your oponent is \(tile.state)")
+            print("Fight! Your oponent is a/an \(tile.state)")
             //if our player won the battle
             //if initiateBattle(player,tile.state) == player {
                 //Our player won    
@@ -161,14 +158,14 @@ extension MapClass {
         if tile.type != .empty  {
             switch tile.type {
                 case .chest:
-                        print("Congratulations you found a treasure chest! You won ")
+                        print("Congratulations you found a treasure chest! You won 5 energy points")
                         tile.type = .empty
-                        //player.getTreasure()
+                        //player.addEnergy(x:5)
 
                 case .rock:
                     print("Bummer! A rock is blocking your way. You must use 1 energy to break it.")
                     tile.type = .empty
-                   // player.reduceEnergy()
+                    //reduceEnergy(player:player)
                 
                 case .teleport:
                 //teleport to a random exit
@@ -176,7 +173,7 @@ extension MapClass {
                 
                 if let pos = playersPositions[player.name] {
                 print("You teleported successfully!")
-                print("Your new position is\(pos)")
+                print("Your new position is (\(pos.y),\(maze.count - pos.x - 1))")
                 //remove the teleport from the player's new position
                 maze[pos.x][pos.y].type = .empty
                 maze[pos.x][pos.y].state = player.hero.race

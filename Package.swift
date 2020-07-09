@@ -7,7 +7,7 @@ let package = Package(
     name: "SwiftFMIRPCore",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        // .package(url: "../MapGeneration", from: "1.0.0"),
+         //.package(path: "../MapGeneration"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

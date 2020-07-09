@@ -1,12 +1,10 @@
-
 public class MapRendererClass : MapRenderer {
     func renderMap(map:MapClass) {
         render(map:map)
         print("\nCurrent player's positions:")
         for player in map.playersPositions.keys {
-            print("\(player) -> (x:\(map.playersPositions[player]!.y),y:\(map.maze.count - map.playersPositions[player]!.x - 1))")
+            print("Player \(player) -> (x:\(map.playersPositions[player]!.y),y:\(map.maze.count - map.playersPositions[player]!.x - 1))")
         }
-        //map.playersPositions.forEach { print("\($0): \($1)") }
         
     } 
 
