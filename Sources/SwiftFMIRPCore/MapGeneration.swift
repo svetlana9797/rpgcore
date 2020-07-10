@@ -3,9 +3,13 @@
 public class MapGeneration : MapGenerator {
 
 func generate(players:[Player]) -> Map {
-return MapClass(players:players)
-
-}
-
+    let renderer = MapRendererClass()
+    let map = MapClass(players:players)
+    renderer.introducePlayers(players: players)
+    
+    //print the map with information for the players and their position on the map
+    renderer.renderMap(map: map)
+    return map
+    }
 }
 

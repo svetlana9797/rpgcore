@@ -2,8 +2,8 @@
 var mapGenerator = MapGeneration()//var mapGenerator = DefaultMapGenerator()
 
 var playerGenerator = PlayerGeneratorClass(heroGenerator: HeroGeneratorClass())
-var figthGenerator = DefaultFightGenerator()
-var equipmentGenerator = DefaultEquipmentGenerator()
+//var figthGenerator = DefaultFightGenerator()
+//var equipmentGenerator = DefaultEquipmentGenerator()
 var mapRendered = MapRendererClass()//var mapRendered = DefaultMapRenderer()
 
 var game = Game(mapGenerator: mapGenerator, playerGenerator: playerGenerator, mapRenderer: mapRendered)
@@ -26,13 +26,11 @@ print("player \(p[0].name) moves to move = \(move.friendlyCommandName)")
 
 m.move(player: p[0], move: move)
 mapRendered.renderMap(map: m)
-
-
-if let race = HeroRace.allCases.randomElement() {
-    var h = HeroClass(race:race.rawValue)
-    print(h.race)
-    }else {
-    print ("Error while generating hero!")
+*/
+/*
+print(availableRaceTypes)
+let h = HeroGeneratorClass()
+for _ in 0...2{
+   print(h.getRandom().race)
 }
 */
-

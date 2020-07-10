@@ -34,11 +34,11 @@ class Game {
            print("Генериране на играч...")
            players.append(playerGenerator.generatePlayer(name: "Player #\(i)"))
        }
-       
+     /*  
        for player in players {
            player.introduce()
        }
-
+*/
         let map = mapGenerator.generate(players: players)
         // 1. Избор на брой играчи. Минимум 2 броя.
         // 1. Генериране на карта с определени брой размери на базата на броя играчи.

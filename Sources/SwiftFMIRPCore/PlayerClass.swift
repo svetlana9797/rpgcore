@@ -20,14 +20,15 @@ protocol PlayerGenerator {
 }
 
 public class PlayerGeneratorClass: PlayerGenerator {
+    
     var heroGenerator: HeroGenerator
     required init(heroGenerator: HeroGenerator) {
         self.heroGenerator = heroGenerator
     }
     
     func generatePlayer(name: String) -> Player {
-        var player = DefaultPlayer()
-        player.name = name
+        var player = PlayerClass(name: name)
+       // player.name = name
         player.hero = heroGenerator.getRandom()
         return player
     }

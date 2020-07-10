@@ -5,6 +5,10 @@ enum HeroRace : String, CaseIterable {
     case ghost = "ghost"
     }
 
+//an array to store all possible races.
+//Every player belongs to a different race
+var availableRaceTypes: [String] = HeroRace.allCases.map { $0.rawValue }
+
 extension Hero {
     func introduce() {
         print("Race: \(race)")
@@ -12,6 +16,7 @@ extension Hero {
         print("Armor: attack \(armor!.attack), defence \(armor!.defence)")
     }
 }
+
 
 public class HeroClass: Hero {
    var race: String
@@ -24,6 +29,7 @@ public class HeroClass: Hero {
 
    public init(race:String) {
        self.race = race
+       //there is a specific weapon and armor for each race
         getDefaultWeapon()
         getDefaultArmor()
         }
@@ -54,7 +60,15 @@ public class HeroClass: Hero {
 public class HeroGeneratorClass: HeroGenerator {
 
     func getRandom() -> Hero {
-        let race = HeroRace.allCases.randomElement()! 
-            return HeroClass(race:race.rawValue)
-    }
+        //select a random race from the available ones
+         let race = availableRaceTypes.randomElement()!
+         
+        //remove the selected race from the possible races
+        if let index = availableRaceTypes.firstIndex(of: race) {
+            availableRaceTypes.remove(at: index)
+            }
+            //construct the Hero
+            return HeroClass(race:race)
+     }
+         
 }

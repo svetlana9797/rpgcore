@@ -8,6 +8,13 @@ public class MapRendererClass : MapRenderer {
         
     } 
 
+    func introducePlayers(players:[Player]) {
+         for player in players {
+           player.introduce()
+           print("\n")
+       }
+    }
+
     func render(map: Map) {
         for row in map.maze {
             self.renderMapRow(row: row)
