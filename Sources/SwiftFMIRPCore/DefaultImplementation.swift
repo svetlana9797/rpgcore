@@ -41,7 +41,7 @@ struct DefaultPlayerGenerator: PlayerGenerator {
 
 struct DefaultHeroGenerator: HeroGenerator {
     func getRandom() -> Hero {
-        return DefaultHero(race:"elf")
+        return DefaultHero()
     }
 }
 

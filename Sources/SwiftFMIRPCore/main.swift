@@ -2,8 +2,8 @@
 var mapGenerator = MapGeneration()//var mapGenerator = DefaultMapGenerator()
 
 var playerGenerator = PlayerGeneratorClass(heroGenerator: HeroGeneratorClass())
-//var figthGenerator = DefaultFightGenerator()
-//var equipmentGenerator = DefaultEquipmentGenerator()
+var figthGenerator = DefaultFightGenerator()
+var equipmentGenerator = DefaultEquipmentGenerator()
 var mapRendered = MapRendererClass()//var mapRendered = DefaultMapRenderer()
 
 var game = Game(mapGenerator: mapGenerator, playerGenerator: playerGenerator, mapRenderer: mapRendered)

@@ -16,7 +16,7 @@ protocol Fight {
     var attacker: Hero {get set}
     var host: Hero {get set}
     
-    func start(finish:(Fight) -> ())
+    //func start(finish:(Fight) -> ())
     var winner: Hero {get set}
 }
 

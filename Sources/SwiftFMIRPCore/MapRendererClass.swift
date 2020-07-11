@@ -5,13 +5,13 @@ public class MapRendererClass : MapRenderer {
         for player in map.playersPositions.keys {
             print("Player \(player) -> (x:\(map.playersPositions[player]!.y),y:\(map.maze.count - map.playersPositions[player]!.x - 1))")
         }
-        
+        print("\n")
     } 
 
     func introducePlayers(players:[Player]) {
          for player in players {
            player.introduce()
-           print("\n")
+           //print("\n")
        }
     }
 

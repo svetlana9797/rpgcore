@@ -116,7 +116,7 @@ public class MapClass : Map {
         //take action based on the map tile
         takeAction(x:xNew,y:yNew,player:player)
         //set the new player position tile with the hero
-        maze[xNew][yNew].state = player.hero.race
+        //maze[xNew][yNew].state = player.hero.race
         
     }
 
@@ -145,45 +145,68 @@ extension MapClass {
         //remove 1 energy
         //player.reduceEnergy(x:1)
 
-        //another player is at the same position as us
+        //another player is at the same position as the current player
         if tile.state != "no player" {
-            print("Fight! Your oponent is a/an \(tile.state)")
-            //if our player won the battle
-            //if initiateBattle(player,tile.state) == player {
-                //Our player won    
-           // }else {
-               //Our player died
-          // }       
-        }
-        if tile.type != .empty  {
-            switch tile.type {
-                case .chest:
-                        print("Congratulations you found a treasure chest! You won 5 energy points")
-                        tile.type = .empty
-                        //player.addEnergy(x:5)
 
-                case .rock:
-                    print("Bummer! A rock is blocking your way. You must use 1 energy to break it.")
-                    tile.type = .empty
-                    //reduceEnergy(player:player)
-                
-                case .teleport:
-                //teleport to a random exit
-                playersPositions[player.name] = teleportsPositions.randomElement()
-                
-                if let pos = playersPositions[player.name] {
-                print("You teleported successfully!")
-                print("Your new position is (\(pos.y),\(maze.count - pos.x - 1))")
-                //remove the teleport from the player's new position
-                maze[pos.x][pos.y].type = .empty
-                maze[pos.x][pos.y].state = player.hero.race
-                } else {
-                    print("Sorry, that teleport is broken at the moment :/")
+            print("Fight! Your oponent is a/an \(tile.state)")
+
+            //create a fight between the players on the same tile
+            let fight = FightClass(attacker: player.hero, host: players.first(where:{ $0.hero.race==tile.state })!.hero)
+            fight.start()
+            print("The winner is the \(fight.winner.race)")
+            var loser:Player
+
+            //if the current player won the battle
+            if fight.winner.race == player.hero.race {  
+                print("Hurray! You won!")
+                 loser = players.first(where: { $0.hero.race==tile.state })!
+
+                 //the current player takes the loser's place on the tile
+                 tile.state = player.hero.race
+            }else { //The current player died
+                loser = player
+                print("Oh no! You died😬")
+           }     
+           loser.isAlive = false
+
+           //remove loser from map
+           playersPositions.removeValue(forKey: loser.hero.race)
+        } else {
+            
+            if tile.type != .empty  {
+                switch tile.type {
+                    case .chest:
+                     print("Congratulations you found a treasure chest! You won 5 energy points")
+                     tile.type = .empty
+                     //player.addEnergy(x:5)
+                     
+                    case .rock:
+                     print("Bummer! A rock is blocking your way. You must use 1 energy to break it.")
+                     tile.type = .empty
+                     //reduceEnergy(player:player)
+                     
+                    case .teleport:
+                     //teleport to a random exit
+                     playersPositions[player.name] = teleportsPositions.randomElement()
+                     
+                     if let pos = playersPositions[player.name] {
+                         print("You teleported successfully!")
+                         print("Your new position is (\(pos.y),\(maze.count - pos.x - 1))")
+                         //remove the teleport from the player's new position
+                         maze[pos.x][pos.y].type = .empty
+                         maze[pos.x][pos.y].state = player.hero.race
+                         }
+                     else {
+                             print("Sorry, that teleport is broken at the moment :/")
+                            }
+                    default: ()
                 }
-                
-                default: ()
+                      
+                tile.state = player.hero.race
+                } 
+            else {
+            tile.state = player.hero.race
             }
         }
-        
     }
 }
