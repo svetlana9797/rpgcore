@@ -1,8 +1,9 @@
-# SwiftFMIRPCore
+# SwiftFMIRPCore base
 
-This project defines the main building blocks for a RolePlayingGame. It conatians a stub implementation to show that a game can be build. The project is separaetd to several modules and each module, can be re-defined.
+This project defines the main building blocks for a RolePlayingGame. It contains a stub implementation to show that a game can be build. The project is separated in several modules and each module can be re-defined.
 
 --------------------------------------------------------------------------------------------------------
+# My implementation
 
 Map Generation & Player Movement Implementation
 
